@@ -6,11 +6,40 @@ import random
 from colorama import Fore, Style
 import pyfiglet
 import sys
+import base64
 
+# Function to decode the username and password
+def decode_credentials(encoded_username, encoded_password):
+    username = base64.b64decode(encoded_username).decode('utf-8')
+    password = base64.b64decode(encoded_password).decode('utf-8')
+    return username, password
+
+# Encoded credentials
+encoded_username = "U0FUTF9IM0U1MzUwMA=="  # Base64 for "SATANH3R35500"
+encoded_password = "U0FUTF0BNTUwMA=="  # Base64 for "SATAN@5500"
+
+# Decode credentials
+username, password = decode_credentials(encoded_username, encoded_password)
+
+# User authentication
+def authenticate():
+    input_username = input(Fore.YELLOW + "Enter Username: ").strip()
+    input_password = input(Fore.YELLOW + "Enter Password: ").strip()
+    
+    if input_username == username and input_password == password:
+        print(Fore.GREEN + "Authentication successful!" + Style.RESET_ALL)
+    else:
+        print(Fore.RED + "Authentication failed! Exiting..." + Style.RESET_ALL)
+        sys.exit(1)
+
+# Clear the console
 os.system("clear")
 
+# Authenticate user
+authenticate()
+
 # List of different styles for the text
-styles = ['script' , 'roman', 'bubble', 'digital' , 'standard']
+styles = ['script', 'roman', 'bubble', 'digital', 'standard']
 
 # Generate a random style
 style = random.choice(styles)
@@ -241,3 +270,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+        
